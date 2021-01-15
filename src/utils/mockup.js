@@ -1,0 +1,25 @@
+export const timelines = {
+  am: [
+    { start: 0, end: 30 },
+    { start: 30, end: 60 },
+    { start: 60, end: 90 },
+    { start: 90, end: 120 },
+    { start: 120, end: 150 },
+    { start: 150, end: 180 },
+    { start: 180, end: 210 },
+    { start: 210, end: 240 },
+    { start: 240, end: 270 },
+    { start: 270, end: 300 },
+  ],
+  pm: [
+    { start: 300, end: 330 },
+    { start: 330, end: 360 },
+    { start: 360, end: 390 },
+    { start: 390, end: 420 },
+    { start: 420, end: 450 },
+    { start: 450, end: 480 },
+    { start: 480, end: 510 },
+    { start: 510, end: 540 },
+    { start: 540, end: 570 },
+  ],
+};

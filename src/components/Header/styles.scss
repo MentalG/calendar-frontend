@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+    border-bottom: 1px solid #6E9ECF;
+    transition: ease 0.5s;
+    padding: 0px 10px;
+
+    button {
+        margin: 0px 10px;
+    }
+}
+
+.header:hover {
+    transition: ease 0.5s;
+    background: #E2ECF5;
+}
