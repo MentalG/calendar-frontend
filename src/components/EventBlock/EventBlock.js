@@ -1,6 +1,6 @@
 import React from "react";
 import Time from "../ui-kit/Time";
-import Event from "../ui-kit/Event";
+import Events from "../Events";
 import "./styles.scss";
 
 const EventBlock = ({ timelines, meridiem, events }) => {
@@ -17,7 +17,7 @@ const EventBlock = ({ timelines, meridiem, events }) => {
         return (
           <div className="event_container" key={key}>
             <Time hours={hours} minutes={minutes} />
-            <Event event={event} timeline={timeline}/>
+            <Events events={event} timeline={timeline}/>
           </div>
         );
       })}

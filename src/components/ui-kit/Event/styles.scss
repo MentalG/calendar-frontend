@@ -1,13 +1,15 @@
-.event_wrapper {
-    width: 200px;
-    // border: 2px solid gold;
-    position: relative;
-    height: 60px;
+.event {
+  display: flex;
+  justify-content: space-between;
+  background: #e2ecf5;
+  border-left: 2px solid #6e9ecf;
+  position: absolute;
+  font-size: 14px;
 
-    .event {
-      background:#E2ECF5;
-      border-left: 2px solid #6E9ECF;
-      position: absolute;
-      font-size: 14px;
+  .event_remove_container {
+    .event_remove {
+      cursor: pointer;
+      margin: 5px;
     }
   }
+}
