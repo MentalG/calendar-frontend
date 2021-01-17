@@ -1,27 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import EventBlock from "../EventBlock";
-import { timelines, events } from "../../utils/mockup";
+import { timelines } from "../../utils/mockup";
+import { getEventsData } from "../../store/selectors/events";
 import "./styles.scss";
 
 const sortByStart = (a, b) => (a.start < b.start ? -1 : 1);
 
 const Calendar = () => {
+  const { data } = useSelector(getEventsData);
   const meridiem = Object.keys(timelines);
-  const sortedEvents = events.sort(sortByStart);
-
-  // const getConflictedEvents = (array) => {
-  //   const arrayShell = [...array];
-  //   const conflictedEvents = []
-
-  //   array.map(element => {
-  //     const temp = element.start + element.duration - 1
-
-  //     conflictedEvents.push(arrayShell.filter(event => temp >= event.start));
-  //     arrayShell.shift()
-  //   })
-
-  //   return conflictedEvents
-  // }
+  const sortedEvents = data.sort(sortByStart);
 
   const getConflictedEvents = (array) => {
     const result = [];
@@ -32,15 +21,18 @@ const Calendar = () => {
       const nextSecondElement = array[i + 2];
 
       if (element?.start + element?.duration > nextElement?.start) {
-        result.push({ ...element, width: 50, position: 'right' });
-        result.push({ ...nextElement, width: 50, position: 'left' });
-      } if (element?.start + element?.duration > nextElement?.start && nextElement?.start + nextElement?.duration > nextSecondElement?.start) {
-        result.push({ ...element, width: 50, position: 'right' });
-        result.push({ ...nextElement, width: 50, position: 'left' });
-        result.push({ ...nextSecondElement, width: 50, position: 'right' });
-      } 
-      else {
-        result.push({ ...element, width: 100, position: 'center' });
+        result.push({ ...element, width: 50, position: "right" });
+        result.push({ ...nextElement, width: 50, position: "left" });
+      }
+      if (
+        element?.start + element?.duration > nextElement?.start &&
+        nextElement?.start + nextElement?.duration > nextSecondElement?.start
+      ) {
+        result.push({ ...element, width: 50, position: "right" });
+        result.push({ ...nextElement, width: 50, position: "left" });
+        result.push({ ...nextSecondElement, width: 50, position: "right" });
+      } else {
+        result.push({ ...element, width: 100, position: "center" });
       }
     }
 
@@ -66,7 +58,11 @@ const Calendar = () => {
 
           return (
             <div className="calendar_meridiem" key={value + key}>
-              <EventBlock timelines={timelines} meridiem={value} events={conflictedEvents}/>
+              <EventBlock
+                timelines={timelines}
+                meridiem={value}
+                events={conflictedEvents}
+              />
             </div>
           );
         })}
@@ -76,21 +72,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
-// <Timeline>
-//   {
-//       timelineItems.map(item => {
-//           const includedEvents = events.filter(event => event.start >= item.start)
-//           const conflictedEvents = getConflictedEvents(includedEvents)
-
-//           return (
-//               <TimelineItem conflictedEvents={conflictedEvents} events={includedEvents} />
-//           )
-//       })
-//   }
-// </Timeline>
-
-// const TimelineItem = props => {
-
-//   props.events.map(event => <Event {...event} />)
-// }
