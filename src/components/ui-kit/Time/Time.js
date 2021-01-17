@@ -1,23 +1,13 @@
 import React from "react";
 import './styles.scss'
 
-const Time = ({ timelines, meridiem }) => {
+const Time = ({hours, minutes}) => {
   return (
-    <div className="calendar_time_container">
-      {timelines[meridiem].map((timeline, key) => {
-        const hours =
-        meridiem === "pm"
-            ? Math.floor(timeline.start / 60) + 8 - 12
-            : Math.floor(timeline.start / 60) + 8;
-        const minutes = timeline.start % 60;
-
-        return (
-          <span className={`time ${minutes === 30 ? 'half' : 'full'}`} key={timeline + key}>{`${hours < 10 ? `0${hours}` : hours}:${
-            minutes === 0 ? `0${minutes}` : minutes
-          }`}</span>
-        );
-      })}
-    </div>
+    <span
+      className={`time ${minutes === 30 ? "half" : "full"}`}
+    >{`${hours < 10 ? `0${hours}` : hours}:${
+      minutes === 0 ? `0${minutes}` : minutes
+    }`}</span>
   );
 };
 

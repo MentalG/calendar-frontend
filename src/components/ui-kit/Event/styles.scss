@@ -1,16 +1,13 @@
-.events_container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.event_wrapper {
     width: 200px;
+    // border: 2px solid gold;
     position: relative;
+    height: 60px;
 
     .event {
-        display: flex;
-        justify-content: flex-start;
-        position: absolute;
-        background: #E2ECF5;
-        border-left: 2px solid #6E9ECF;
-        width: 100%;
+      background:#E2ECF5;
+      border-left: 2px solid #6E9ECF;
+      position: absolute;
+      font-size: 14px;
     }
-}
+  }
