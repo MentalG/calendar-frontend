@@ -10,7 +10,8 @@ const Event = ({ event, timeline }) => {
         const top = `${((item.start % 30) / 30) * 100}%`;
         const left = item.position === 'right' ? '50%' : '0%';
         const lengthDuration = Math.floor(item.width / 6.6);
-        const title = `${item.title.slice(0, lengthDuration)} ...`
+        const slicedTitle = item.title.slice(0, lengthDuration)
+        const title = `${slicedTitle} ${slicedTitle === item.title ? '' : '...'}`
 
         return (
           <div className="event" style={{ height, width, top, left }}>
