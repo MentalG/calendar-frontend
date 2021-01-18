@@ -1,4 +1,4 @@
-## Code&care Test
+## Code&Care Test
 
 To start the front-end part of this project, after cloning you should run:
 
