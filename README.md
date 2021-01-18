@@ -16,4 +16,4 @@ You will also see any lint errors in the console. I hope that there is no errors
 
 ## Back-end part of this project
 
-[Code&care-Backend](https://github.com/MentalG/calendar-backend)
+[Code&Care-Backend](https://github.com/MentalG/calendar-backend)
