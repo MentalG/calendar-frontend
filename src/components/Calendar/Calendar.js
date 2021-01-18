@@ -1,16 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import EventBlock from "../EventBlock";
 import { timelines } from "../../utils/mockup";
 import { getEventsData } from "../../store/selectors/events";
+import { getEvents } from '../../store/actions/events'
 import "./styles.scss";
 
 const sortByStart = (a, b) => (a.start < b.start ? -1 : 1);
 
 const Calendar = () => {
+  const dispatch = useDispatch();
   const { data } = useSelector(getEventsData);
   const meridiem = Object.keys(timelines);
-  const sortedEvents = data.sort(sortByStart);
+  const sortedEvents = [...data]?.sort(sortByStart);
+
+  useEffect(() => {
+    dispatch(getEvents())
+  }, [dispatch])
 
   const getConflictedEvents = (array) => {
     const result = [];
@@ -36,9 +42,10 @@ const Calendar = () => {
       }
     }
 
-    return [...new Set(result.map((item) => item.title))].map((title) => {
+    return [...new Set(result.map((item) => item.title))].map((title, key) => {
       return {
         title,
+        id: key,
         start: result.find((event) => event.title === title).start,
         duration: result.find((event) => event.title === title).duration,
         width: result.find((event) => event.title === title).width,
@@ -47,28 +54,32 @@ const Calendar = () => {
     });
   };
 
-  return (
-    <div className="calendar_container">
-      <div className="calendar">
-        {meridiem.map((value, key) => {
-          const includedEvents = sortedEvents.filter((event) =>
-            value === "am" ? event.start <= 300 : event.start >= 300
-          );
-          const conflictedEvents = getConflictedEvents(includedEvents);
+  const renderCalendar = () => {
+    return (
+      <div className="calendar_container">
+        <div className="calendar">
+          {meridiem.map((value, key) => {
+            const includedEvents = sortedEvents.filter((event) =>
+              value === "am" ? event.start <= 300 : event.start >= 300
+            );
+            const conflictedEvents = getConflictedEvents(includedEvents);
 
-          return (
-            <div className="calendar_meridiem" key={value + key}>
-              <EventBlock
-                timelines={timelines}
-                meridiem={value}
-                events={conflictedEvents}
-              />
-            </div>
-          );
-        })}
+            return (
+              <div className="calendar_meridiem" key={value + key}>
+                <EventBlock
+                  timelines={timelines}
+                  meridiem={value}
+                  events={conflictedEvents}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  return <>{renderCalendar()}</>;
 };
 
 export default Calendar;
