@@ -10,7 +10,6 @@ export default class Events extends Base {
   }
 
   exportJson() {
-    console.log('test');
     return this.apiClient.get('events/exportJson');
   }
 }

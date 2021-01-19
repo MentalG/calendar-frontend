@@ -2,7 +2,7 @@ import React from "react";
 import Event from '../ui-kit/Event';
 import "./styles.scss";
 
-const Events = ({ events }) => {
+const Events = ({ events, removeHandler }) => {
   return (
     <div className="event_wrapper">
       {events.map((event, key) => {
@@ -17,7 +17,7 @@ const Events = ({ events }) => {
         }`;
 
         return (
-          <Event height={height} width={width} top={top} left={left} title={title} key={key + title} originalTitle={event.title}/>
+          <Event height={height} width={width} top={top} left={left} title={title} key={key + title} originalTitle={event.title} id={event.id} removeHandler={removeHandler}/>
         );
       })}
     </div>

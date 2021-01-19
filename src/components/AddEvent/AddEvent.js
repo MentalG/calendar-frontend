@@ -16,9 +16,10 @@ const AddEvent = ({hideModal}) => {
 
   const addEventHandler = () => {
     const start = (fromHours.current.state.value % 8) * 60 + fromMinutes.current.state.value;
-    const duration =  ((toHours.current.state.value % 8) * 60 + toMinutes.current.state.value) - start;
+    const duration =  ((toHours.current.state.value - 8) * 60 + toMinutes.current.state.value) - start
     const title = inputRef.current.state.value;
     const events = [...data, {start,duration,title}]
+
 
     dispatch(setEvents(events))
     hideModal();
