@@ -1,17 +1,17 @@
 import { TOKEN } from '../constans/storage';
 
-export const getFromStorage = async key => {
-    let data = await localStorage.getItem(key)
+export const getFromStorage = key => {
+    let data = localStorage.getItem(key)
     return data
 }
 
-export const putInStorage = async (key, data) => {
-    await localStorage.setItem(key, JSON.stringify(data))
+export const putInStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data))
 }
 
-export const updateStorage = async (key, data) => {
-    await deleteFromStorage(key)
-    await putInStorage(key, data)
+export const updateStorage = (key, data) => {
+    deleteFromStorage(key)
+    putInStorage(key, data)
 }
 
 export const deleteFromStorage = async key => {
